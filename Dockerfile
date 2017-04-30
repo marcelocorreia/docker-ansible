@@ -1,26 +1,19 @@
-FROM debian:jessie-slim
+FROM alpine:3.5
 MAINTAINER marcelo correia <marcelocorreia@starvisitor.com>
 
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN set -ex \
+    && apk add --no-cache \
+        py-pip \
+        build-base \
+        python-dev \
+        libffi-dev \
+        openssl-dev \
+        bash \
+        tzdata \
+    && pip install ansible \
+	&& apk del build-base py-pip libffi-dev openssl-dev
 
-RUN apt-get install -y \
-    curl \
-    libldap2-dev \
-    libpq-dev \
-    libsasl2-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    openssl \
-    python \
-    python-dev \
-    python-pip \
-    tzdata \
-    unzip
-RUN pip install --upgrade pip
-RUN pip install awscli boto
-RUN pip install ansible
-
+WORKDIR /ansible
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
 

@@ -7,6 +7,7 @@ VERSION=2.3.0.0
 PIPELINE_NAME=$(REPOSITORY)-release
 CI_TARGET=dev
 TZ=Australia/Sydney
+#TZ=GMT
 
 build:
 	@docker build \
