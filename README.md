@@ -16,11 +16,27 @@ $> docker run --rm -v $(shell pwd):/opt/workspace \
 ## Packages Installed
 
 
+### Workdir
+Workdir set to /op/workspace
+
+### Timezone
+
+Timezone set to UTC.
+Set TZ Environment variable to change it as needed.
+
+#### Example
+
+```bash
+>$ docker run --rm -v $(shell pwd):/opt/workspace \
+      		marcelocorreia/ansible \
+      		-v $(shell pwd):/opt/workspace
+      		-e TZ=Australia/Sydney \
+      		ansible-playbook -i /inventory a.play.book.yml 
+```
+
 ## Example
 ```bash
 $> docker run --rm -v $(shell pwd):/opt/workspace \
-   		marcelocorreia/terraform \
-   		terraform $1 -var-file variables.tfvars \
-   		-var aws_access_key=${aws_access_key_id} \
-   		-var aws_secret_key=${aws_secret_access_key}
+   		marcelocorreia/ansible \
+   		terraform $1 -var-file variables.tfvars    		
 ```
