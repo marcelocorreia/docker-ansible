@@ -17,7 +17,7 @@ $> docker run --rm -v $(shell pwd):/opt/workspace \
 
 
 ### Workdir
-Workdir set to /op/workspace
+Workdir set to /opt/workspace
 
 ### Timezone
 
@@ -35,6 +35,7 @@ Set TZ Environment variable to change it as needed.
 ```
 
 ## Example
+
 ```bash
 $> docker run --rm -v $(shell pwd):/opt/workspace \
    		marcelocorreia/ansible \
