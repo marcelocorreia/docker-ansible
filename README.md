@@ -10,8 +10,8 @@ Docker image with [Ansible](http://docs.ansible.com) + [AWS CLI](https://aws.ama
 ## Usage
 ```bash
 $> docker run --rm -v $(shell pwd):/opt/workspace \
-   		marcelocorreia/terraform \
-   		terraform [--version] [--help] <command> [args]
+   		marcelocorreia/ansible \
+   		ansible --version] 
 ```
 ## Packages Installed
 
@@ -38,5 +38,5 @@ Set TZ Environment variable to change it as needed.
 ```bash
 $> docker run --rm -v $(shell pwd):/opt/workspace \
    		marcelocorreia/ansible \
-   		terraform $1 -var-file variables.tfvars    		
+   		ansible --version    		
 ```
