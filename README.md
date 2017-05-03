@@ -41,3 +41,4 @@ $> docker run --rm -v $(shell pwd):/opt/workspace \
    		marcelocorreia/ansible \
    		ansible --version    		
 ```
+                                                                                                                                                                        

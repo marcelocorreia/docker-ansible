@@ -45,6 +45,17 @@ set-pipeline:
 	fly -t $(CI_TARGET) watch -j $(PIPELINE_NAME)/$(PIPELINE_NAME)
 .PHONY: set-pipeline
 
+slack-pipeline:
+	fly -t $(CI_TARGET) set-pipeline \
+		-n -p slack \
+		-c slack.yml \
+		-l ~/.ssh/ci-credentials.yml
+
+	fly -t $(CI_TARGET) unpause-pipeline -p slack
+	fly -t $(CI_TARGET) trigger-job -j slack/slack
+	fly -t $(CI_TARGET) watch -j slack/slack
+.PHONY: set-pipeline
+
 
 watch-pipeline:
 	fly -t $(CI_TARGET) watch -j $(PIPELINE_NAME)/$(PIPELINE_NAME)
