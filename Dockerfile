@@ -1,8 +1,7 @@
 FROM alpine:3.5
 MAINTAINER marcelo correia <marcelocorreia@starvisitor.com>
 
-RUN set -ex \
-    && apk add --no-cache \
+RUN set -ex && apk add --no-cache \
         py-pip \
         build-base \
         python-dev \
