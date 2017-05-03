@@ -13,7 +13,6 @@ RUN set -ex \
     && pip install ansible \
 	&& apk del build-base py-pip libffi-dev openssl-dev
 
-WORKDIR /ansible
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
 
