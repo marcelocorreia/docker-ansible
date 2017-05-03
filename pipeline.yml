@@ -4,7 +4,6 @@ resource_types:
     source:
       repository: cfcommunity/slack-notification-resource
       tag: latest
-
 resources:
   - name: dockerfile
     type: git
@@ -14,6 +13,7 @@ resources:
       paths: [Dockerfile]
       private_key: {{git_private_key}}
       username: {{github_user}}
+
 
   - name: slack-alert
     type: slack-notification
@@ -29,6 +29,17 @@ resources:
       password: {{docker_password}}
       cache: true
 
+  - name: resource_version
+    type: semver
+    source:
+      driver: git
+      initial_version: 0.0.0
+      uri: {{git_repo_url}}
+      branch: version
+      file: version
+      private_key: {{git_private_key}}
+      username: {{github_user}}
+
   - name: github_release
     type: github-release
     source:
@@ -42,15 +53,16 @@ jobs:
     plan:
       - get: dockerfile
         trigger: true
+      - get: resource_version
       - put: docker_image
         params:
           build: dockerfile
-          tag: {{version}}
+          tag: resource_version/version
           tag_as_latest: true
       - put: github_release
         params:
-          name: {{version}}
-          tag: {{version}}
+          name: resource_version/version
+          tag: resource_version/version
       - put: slack-alert
         params:
           channel: '#ci'

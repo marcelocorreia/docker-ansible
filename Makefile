@@ -37,7 +37,8 @@ set-pipeline:
         -v container_fullname=$(NAMESPACE)/$(CONTAINER) \
         -v container_name=$(CONTAINER) \
 		-v git_repo=$(REPOSITORY) \
-        -v git_branch=master
+        -v git_branch=master \
+        -v version=2.3.0.0
 
 	fly -t $(CI_TARGET) unpause-pipeline -p $(PIPELINE_NAME)
 	fly -t $(CI_TARGET) trigger-job -j $(PIPELINE_NAME)/$(PIPELINE_NAME)
