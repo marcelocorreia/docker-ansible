@@ -11,8 +11,8 @@ RUN set -ex && apk add --no-cache \
         tzdata \
     && pip install ansible \
 	&& apk del build-base py-pip libffi-dev openssl-dev
-
 RUN mkdir -p /opt/workspace
+
 WORKDIR /opt/workspace
 
 CMD ansible --version
