@@ -11,7 +11,6 @@ resources:
     source:
       uri: {{git_repo_url}}
       branch: master
-      paths: [Dockerfile]
       private_key: {{git_private_key}}
       username: {{github_user}}
 
