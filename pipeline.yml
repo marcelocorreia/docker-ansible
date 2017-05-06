@@ -34,7 +34,7 @@ resources:
     type: semver
     source:
       driver: git
-      initial_version: 0.0.0.0
+      initial_version: 0.0.0
       uri: {{git_repo_url}}
       branch: version
       file: version
