@@ -6,7 +6,7 @@ resource_types:
       tag: latest
 
 resources:
-  - name: dockerfile
+  - name: docker-repo
     type: git
     source:
       uri: {{git_repo_url}}
@@ -41,12 +41,12 @@ jobs:
   - name: docker-ansible-release
     serial: true
     plan:
-      - get: dockerfile
+      - get: docker-repo
         trigger: true
       - put: docker_image
         params:
-          build: dockerfile
-          tag: '{{version}}'
+          build: docker-repo/Dockerfile
+          tag: docker-repo/version
           tag_as_latest: true
       - put: github_release
         params:
