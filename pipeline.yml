@@ -55,8 +55,6 @@ jobs:
       - get: dockerfile
         trigger: true
       - get: resource_version
-        params:
-          bump: patch
       - put: docker_image
         params:
           build: dockerfile
