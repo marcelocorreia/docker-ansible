@@ -43,11 +43,10 @@ jobs:
     plan:
       - get: dockerfile
         trigger: true
-      - get: resource_version
       - put: docker_image
         params:
           build: dockerfile
-          tag: {{version}}
+          tag: '{{version}}'
           tag_as_latest: true
       - put: github_release
         params:
