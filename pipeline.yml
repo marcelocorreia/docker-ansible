@@ -4,6 +4,7 @@ resource_types:
     source:
       repository: cfcommunity/slack-notification-resource
       tag: latest
+
 resources:
   - name: dockerfile
     type: git
@@ -33,7 +34,7 @@ resources:
     type: semver
     source:
       driver: git
-      initial_version: 0.0.0
+      initial_version: 0.0.0.0
       uri: {{git_repo_url}}
       branch: version
       file: version
@@ -54,11 +55,16 @@ jobs:
       - get: dockerfile
         trigger: true
       - get: resource_version
+        params:
+          bump: patch
       - put: docker_image
         params:
           build: dockerfile
           tag: resource_version/version
           tag_as_latest: true
+      - put: resource_version
+        params:
+          file: resource_version/version
       - put: github_release
         params:
           name: resource_version/version

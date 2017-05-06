@@ -1,0 +1,23 @@
+resource_types:
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: latest
+resources:
+  - name: slack-alert
+    type: slack-notification
+    source:
+      url: {{slack_webook}}
+
+jobs:
+  - name: slack
+    serial: true
+    plan:
+      - put: slack-alert
+        params:
+          channel: '#ci'
+          text: |
+            The build had a result. Check it out at:
+            http://concourse-ci.correia.io/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+            Result: $TEXT_FILE_CONTENT
