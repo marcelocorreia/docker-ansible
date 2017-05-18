@@ -14,7 +14,6 @@ resources:
       private_key: {{git_private_key}}
       username: {{github_user}}
 
-
   - name: slack-alert
     type: slack-notification
     source:
@@ -51,9 +50,19 @@ jobs:
         params:
           name: docker-repo/version
           tag: docker-repo/version
-      - put: slack-alert
-        params:
-          channel: '#ci'
-          text: |
-            {{container_name}} has a new build. Check it out at:
-            http://concourse-ci.correia.io/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+    on_failure:
+      put: slack-alert
+      params:
+        channel: '#ci'
+        text: |
+          Build $BUILD_NAME. *$BUILD_JOB_NAME* failed!
+          Check it out at:
+          https://concourse-ci.correia.io/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+    on_success:
+      put: slack-alert
+      params:
+        channel: '#ci'
+        text: |
+          :white_check_mark: $BUILD_PIPELINE_NAME has a new release.
+          Check it out at:
+          https://concourse-ci.correia.io/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
