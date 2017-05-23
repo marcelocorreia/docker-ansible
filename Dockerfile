@@ -9,6 +9,9 @@ RUN set -ex && apk add --no-cache \
         openssl-dev \
         bash \
         tzdata \
+        git \
+        make \
+        openssh \
     && pip install ansible \
 	&& apk del build-base py-pip libffi-dev openssl-dev
 RUN mkdir -p /opt/workspace
