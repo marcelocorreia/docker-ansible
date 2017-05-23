@@ -13,8 +13,8 @@ RUN apk add --no-cache \
         git \
         make \
         openssh
+RUN pip install --upgrade pip
 RUN pip install ansible
-RUN rm /var/cache/apk/*
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
 CMD ansible --version
