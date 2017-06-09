@@ -9,7 +9,13 @@ CI_TARGET=dev
 TZ=Australia/Sydney
 #TZ=GMT
 
+git-push:
+	git add .; git commit -m "Pipeline WIP"; git push
+
 build:
+	cat Dockerfile | sed  's/ARG version=".*"/ARG version="$(VERSION)"/' > /tmp/Dockerfile.tmp
+	cat /tmp/Dockerfile.tmp > Dockerfile
+	rm /tmp/Dockerfile.tmp
 	@docker build \
 		-t $(NAMESPACE)/$(CONTAINER):latest .
 .PHONY: build
@@ -22,13 +28,13 @@ run:
 .PHONY: run
 
 shell:
-	@docker run --rm -it \
+	@echo docker run --rm -it \
 		-e TZ=$(TZ) \
 		$(NAMESPACE)/$(CONTAINER):latest \
 		bash
 .PHONY: shell
 
-set-pipeline:
+set-pipeline: git-push
 	fly -t $(CI_TARGET) set-pipeline \
 		-n -p $(PIPELINE_NAME) \
 		-c pipeline.yml \
