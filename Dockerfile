@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 MAINTAINER marcelo correia <marcelocorreia@starvisitor.com>
 
 RUN set -ex
