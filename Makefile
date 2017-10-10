@@ -3,7 +3,7 @@
 REPOSITORY=docker-ansible
 CONTAINER=ansible
 NAMESPACE=marcelocorreia
-VERSION=2.3.0.0
+VERSION=2.4.0.0
 PIPELINE_NAME=$(REPOSITORY)-release
 CI_TARGET=dev
 TZ=Australia/Sydney
