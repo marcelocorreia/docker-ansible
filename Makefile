@@ -9,6 +9,9 @@ CI_TARGET=dev
 TZ=Australia/Sydney
 #TZ=GMT
 
+pipeline-login:
+	fly -t dev login -n dev -c https://ci.correia.io
+
 git-push:
 	git add .; git commit -m "Pipeline WIP"; git push
 
